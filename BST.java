@@ -27,6 +27,10 @@ public class BST {
 		}
 		return root;
 	}
+
+	public Node search(int x) {
+		//TODO: your code here
+	}
 	
 	public void inOrder() {
 		//TODO: your code here
