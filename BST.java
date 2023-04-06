@@ -3,17 +3,29 @@ package project3;
 public class BST {
 
 	private Node rootNode;
-	
+
 	public BST() {
 		//TODO: your code here
+		this.rootNode = null;
 	}
 	
 	public void insert(int data) {
 		//TODO: your code here
 	}
-	
-	public Node search(int x) {
-		//TODO: your code here
+
+	public Node insertRecursion(Node root, int data){
+
+		if (root == null){
+			root = new Node(data, null, null);
+			return root;
+		}
+		else if (data < root.getData()){
+			root = insertRecursion(root.getLeftNode(), data);
+		}
+		else {
+			root = insertRecursion(root.getRightNode(), data);
+		}
+		return root;
 	}
 	
 	public void inOrder() {
