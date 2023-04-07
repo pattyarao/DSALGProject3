@@ -11,6 +11,7 @@ public class BST {
 	
 	public void insert(int data) {
 		//TODO: your code here
+		this.rootNode = insertRecursion(this.rootNode,data);
 	}
 
 	public Node insertRecursion(Node root, int data){
