@@ -10,8 +10,8 @@ public class BST {
 	}
 
 	public void insert(int data) {
-		//TODO: your code here
-		this.rootNode = insertRecursion(this.rootNode,data);
+		// TODO: your code here
+		this.rootNode = insertRecursion(this.rootNode, data);
 	}
 
 	public Node insertRecursion(Node root, int data) {
@@ -49,10 +49,30 @@ public class BST {
 
 	public void inOrder() {
 		// TODO: your code here
+		inOrderRecursion(this.rootNode);
+	}
+
+	// helper function for In Order Recursion
+	public void inOrderRecursion(Node node) {
+		if (node != null) {
+			inOrderRecursion(node.getLeftNode());
+			System.out.println(node.getData() + " ");
+			inOrderRecursion(node.getRightNode());
+		}
 	}
 
 	public void preOrder() {
 		// TODO: your code here
+		preOrderRecursion(this.rootNode);
+	}
+
+	// helper function for Pre Order Recursion
+	public void preOrderRecursion(Node node) {
+		if (node != null) {
+			System.out.println(node.getData() + " ");
+			preOrderRecursion(node.getLeftNode());
+			preOrderRecursion(node.getRightNode());
+		}
 	}
 
 	public void postOrder() {
@@ -75,7 +95,7 @@ public class BST {
 		}
 
 		while (currentNode.getRightNode() != null) {
-			currentNode = currentNode.getRightNode();	// go to right of the tree until
+			currentNode = currentNode.getRightNode(); // go to right of the tree until
 														// we get to the largest/max value
 		}
 
@@ -90,32 +110,29 @@ public class BST {
 		}
 
 		while (currentNode.getLeftNode() != null) {
-			currentNode = currentNode.getLeftNode();	// go to left of the tree until
+			currentNode = currentNode.getLeftNode(); // go to left of the tree until
 														// we get to the smallest/min value
 		}
 
 		return current;
 	}
 
-
 	public Node parent(int data) {
 		// TODO: your code here
-		return parentSearch(this.rootNode,data);
+		return parentSearch(this.rootNode, data);
 	}
 
-	public Node parentSearch(Node node, int data){
+	public Node parentSearch(Node node, int data) {
 		if (node.getData() == data || (node.getLeftNode() == null
-				&& node.getRightNode() == null)){
+				&& node.getRightNode() == null)) {
 			return null;
 		}
 
-		if (node.getLeftNode() != null && node.getLeftNode().getData() == data){
+		if (node.getLeftNode() != null && node.getLeftNode().getData() == data) {
 			return node;
-		}
-		else if (node.getRightNode() != null && node.getRightNode().getData() == data){
+		} else if (node.getRightNode() != null && node.getRightNode().getData() == data) {
 			return node;
-		}
-		else if (data < node.getData()) {
+		} else if (data < node.getData()) {
 			return parentSearch(node.getLeftNode(), data);
 		} else {
 			return parentSearch(node.getRightNode(), data);
@@ -123,13 +140,12 @@ public class BST {
 
 	}
 
-
 	public Node successor(int data) {
 		// TODO: your code here
 
 		Node temp = search(data);
 
-		if (temp.getRightNode() != null){
+		if (temp.getRightNode() != null) {
 			return minFinder(temp.getRightNode());
 		}
 
@@ -137,7 +153,7 @@ public class BST {
 
 		while (parentNode != null &&
 				temp.getData() == parentNode.getRightNode().getData()
-				&& parentNode.getRightNode() != null){
+				&& parentNode.getRightNode() != null) {
 			temp = parentNode;
 			parentNode = parent(parentNode.getData());
 		}
@@ -145,9 +161,9 @@ public class BST {
 		return parentNode;
 	}
 
-	public Node minFinder(Node node){
+	public Node minFinder(Node node) {
 		Node temp = node;
-		while (temp.getLeftNode() != null){
+		while (temp.getLeftNode() != null) {
 			temp = temp.getLeftNode();
 		}
 
@@ -159,7 +175,7 @@ public class BST {
 
 		Node temp = search(data);
 
-		if (temp.getLeftNode() != null){
+		if (temp.getLeftNode() != null) {
 			return maxFinder(temp.getLeftNode());
 		}
 
@@ -167,7 +183,7 @@ public class BST {
 
 		while (parentNode != null
 				&& temp.getData() == parentNode.getLeftNode().getData()
-				&& parentNode.getLeftNode() != null){
+				&& parentNode.getLeftNode() != null) {
 			temp = parentNode;
 			parentNode = parent(parentNode.getData());
 		}
@@ -175,9 +191,9 @@ public class BST {
 		return parentNode;
 	}
 
-	public Node maxFinder(Node node){
+	public Node maxFinder(Node node) {
 		Node temp = node;
-		while (temp.getRightNode() != null){
+		while (temp.getRightNode() != null) {
 			temp = temp.getRightNode();
 		}
 
