@@ -56,15 +56,45 @@ public class BST {
 	}
 
 	public void postOrder() {
-		// TODO: your code here
+		postOrderRecursion(this.rootNode);
+	}
+
+	public void postOrderRecursion(Node node) {
+		if (node != null) {
+			postOrderRecursion(node.getLeftNode());
+			postOrderRecursion(node.getRightNode());
+			System.out.print(node.getData() + " ");
+		}
 	}
 
 	public Node maximum() {
-		// TODO: your code here
+		Node currentNode = this.rootNode;
+
+		if (this.rootNode == null) {
+			return null;
+		}
+
+		while (currentNode.getRightNode() != null) {
+			currentNode = currentNode.getRightNode();	// go to right of the tree until
+														// we get to the largest/max value
+		}
+
+		return current;
 	}
 
 	public Node minimum() {
-		// TODO: your code here
+		Node currentNode = this.rootNode;
+
+		if (this.rootNode == null) {
+			return null;
+		}
+
+		while (currentNode.getLeftNode() != null) {
+			currentNode = currentNode.getLeftNode();	// go to left of the tree until
+														// we get to the smallest/min value
+		}
+
+		return current;
 	}
 
 
