@@ -9,6 +9,16 @@ public class BST {
 		this.rootNode = null;
 	}
 
+	public Node getRoot(){
+		return this.rootNode;
+	}
+
+	public void printRootNode(){
+		System.out.println(this.rootNode.getData());
+		System.out.println(this.rootNode.getLeftNode().getData());
+		System.out.println(this.rootNode.getRightNode().getData());
+	}
+
 	public void insert(int data) {
 		// TODO: your code here
 		this.rootNode = insertRecursion(this.rootNode, data);
@@ -20,9 +30,9 @@ public class BST {
 			root = new Node(data, null, null);
 			return root;
 		} else if (data < root.getData()) {
-			root = insertRecursion(root.getLeftNode(), data);
+			root.setLeftNode(insertRecursion(root.getLeftNode(), data));
 		} else {
-			root = insertRecursion(root.getRightNode(), data);
+			root.setRightNode(insertRecursion(root.getRightNode(), data));
 		}
 		return root;
 	}
@@ -54,11 +64,13 @@ public class BST {
 
 	// helper function for In Order Recursion
 	public void inOrderRecursion(Node node) {
-		if (node != null) {
-			inOrderRecursion(node.getLeftNode());
-			System.out.println(node.getData() + " ");
-			inOrderRecursion(node.getRightNode());
+		if (node == null) {
+			return;
 		}
+
+		inOrderRecursion(node.getLeftNode());
+		System.out.print(node.getData() + " ");
+		inOrderRecursion(node.getRightNode());
 	}
 
 	public void preOrder() {
@@ -69,7 +81,7 @@ public class BST {
 	// helper function for Pre Order Recursion
 	public void preOrderRecursion(Node node) {
 		if (node != null) {
-			System.out.println(node.getData() + " ");
+			System.out.print(node.getData() + " ");
 			preOrderRecursion(node.getLeftNode());
 			preOrderRecursion(node.getRightNode());
 		}
@@ -99,7 +111,7 @@ public class BST {
 														// we get to the largest/max value
 		}
 
-		return current;
+		return currentNode;
 	}
 
 	public Node minimum() {
@@ -114,7 +126,7 @@ public class BST {
 														// we get to the smallest/min value
 		}
 
-		return current;
+		return currentNode;
 	}
 
 	public Node parent(int data) {
@@ -151,9 +163,9 @@ public class BST {
 
 		Node parentNode = parent(data);
 
-		while (parentNode != null &&
-				temp.getData() == parentNode.getRightNode().getData()
-				&& parentNode.getRightNode() != null) {
+		while (parentNode != null
+				&& parentNode.getRightNode() != null
+				&& temp.getData() == parentNode.getRightNode().getData()) {
 			temp = parentNode;
 			parentNode = parent(parentNode.getData());
 		}
@@ -182,8 +194,8 @@ public class BST {
 		Node parentNode = parent(data);
 
 		while (parentNode != null
-				&& temp.getData() == parentNode.getLeftNode().getData()
-				&& parentNode.getLeftNode() != null) {
+				&& parentNode.getLeftNode() != null
+				&& temp.getData() == parentNode.getLeftNode().getData()) {
 			temp = parentNode;
 			parentNode = parent(parentNode.getData());
 		}
